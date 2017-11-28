@@ -1,0 +1,28 @@
+{
+  "name": "qcloudsms_js",
+  "version": "0.1.0",
+  "description": "qcloudsms nodejs sdk",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qcloudsms/qcloudsms_js.git"
+  },
+  "keywords": [
+    "qcloud",
+    "sms",
+    "nodejs",
+    "sdk"
+  ],
+  "author": "qcloudsms",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/qcloudsms/qcloudsms_js/issues"
+  },
+  "homepage": "https://github.com/qcloudsms/qcloudsms_js#readme",
+  "devDependencies": {
+    "jsdoc": "^3.5.5"
+  }
+}
