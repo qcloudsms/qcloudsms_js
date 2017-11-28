@@ -43,7 +43,7 @@ npm install qcloudsms_js
 
 1. 手动下载或clone最新版本qcloudsms_js代码
 2. 把qcloudsms_js把代码放入项目目录
-3. 然后在项目require qcloudsms_js, 如: `var moduleName = require("path/to/qcloudsms_js/index.js")`
+3. 然后在项目里require qcloudsms_js, 如: `var moduleName = require("path/to/qcloudsms_js")`
 
 ## 用法
 
@@ -65,7 +65,7 @@ function callback(err, res, resData) {
     if (err)
         console.log("err: ", err);
     else
-        console.log("response data: ", data);
+        console.log("response data: ", resData);
 }
 ```
 
@@ -142,9 +142,9 @@ spuller.pullReply(10, callback);
 ```javascript
 var mspuller = qcloudsms.SmsMobileStatusPuller();
 // 拉取短信回执
-mspuller.pullCallback(86, phoneNumbers[0], 1511125600, 1511841600, 10, callback);
+mspuller.pullCallback("86", phoneNumbers[0], 1511125600, 1511841600, 10, callback);
 // 拉取回复
-mspuller.pullReply(86, phoneNumbers[0], 1511125600, 1511841600, 10, callback);
+mspuller.pullReply("86", phoneNumbers[0], 1511125600, 1511841600, 10, callback);
 ```
 
 - **发送海外短信**
