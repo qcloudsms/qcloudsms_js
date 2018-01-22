@@ -1,33 +1,58 @@
 腾讯云短信 Node.js SDK
 ===
 
-# Overview
+## 腾讯短信服务
 
-> 目前腾讯云短信为客户提供国内短信，海外短信，语音通知三大服务。
+目前`腾讯云短信`为客户提供`国内短信`、`国内语音`和`海外短信`三大服务，腾讯云短信SDK支持以下操作：
 
-> 国内短信提供单发，群发，带模板ID单发，带模板ID群发以及短信回执与回复拉取。
+### 国内短信
 
-> 海外短信和国内短信使用同一接口，只需替换相应的国家码与手机号码，每次请求群发接口手机号码需全部为国内或者海外手机号码。
+国内短信支持操作：
 
-> 语音通知目前支持语音验证码以及语音通知功能。
+- 单发短信
+- 指定模板单发短信
+- 群发短信
+- 指定模板群发短信
+- 拉取短信回执和短信回复状态
 
-# Getting Start
+> `Note` 短信拉取功能需要联系腾讯云短信技术支持(QQ:3012203387)开通权限，量大客户可以使用此功能批量拉取，其他客户不建议使用。
 
-## 准备
+### 海外短信
 
-- [ ] 申请APPID以及APPKey
+海外短信支持操作：
 
-> 在开始本教程之前，您需要先获取APPID和APPkey，如您尚未申请，请到https://console.qcloud.com/sms/smslist 中添加应用，应用添加成功后您将获得APPID以及APPKey，注意APPID是以14xxxxx开头。
+- 单发短信
+- 指定模板单发短信
+- 群发短信
+- 指定模板群发短信
+- 拉取短信回执和短信回复状态
 
-- [ ] 申请签名
+> `Note` 海外短信和国内短信使用同一接口，只需替换相应的国家码与手机号码，每次请求群发接口手机号码需全部为国内或者海外手机号码。
 
-> 下发短信必须携带签名，在相应服务模块 *短信内容配置*  中进行申请。
+### 语音通知
 
-- [ ] 申请模板
+语音通知支持操作：
 
-> 下发短信内容必须经过审核，在相应服务 *短信内容配置* 中进行申请。
+- 发送语音验证码
+- 发送语音通知
 
-完成以上三项便可开始代码开发。
+## 开发
+
+### 准备
+
+在开始开发云短信应用之前，需要准备如下信息:
+
+- [x] 获取SDK AppID和AppKey
+
+云短信应用SDK `AppID`和`AppKey`可在[短信控制台](https://console.cloud.tencent.com/sms)的应用信息里获取，如您尚未添加应用，请到[短信控制台](https://console.cloud.tencent.com/sms)中添加应用。
+
+- [x] 申请签名
+
+一个完整的短信由短信`签名`和短信正文内容两部分组成，短信`签名`须申请和审核，`签名`可在[短信控制台](https://console.cloud.tencent.com/sms)的相应服务模块`内容配置`中进行申请。
+
+- [x] 申请模板
+
+同样短信或语音正文内容`模板`须申请和审核，`模板`可在[短信控制台](https://console.cloud.tencent.com/sms)的相应服务模块`内容配置`中进行申请。
 
 ## 安装
 
@@ -47,20 +72,32 @@ npm install qcloudsms_js
 
 ## 用法
 
-> 若您对接口存在疑问，可以查阅[API文档](https://qcloudsms.github.io/qcloudsms_js/)。
+> 若您对接口存在疑问，可以查阅[API开发指南](https://cloud.tencent.com/document/product/382/5808)、[API文档](https://qcloudsms.github.io/qcloudsms_py/)和[错误码](https://cloud.tencent.com/document/product/382/3771)。
 
 - **准备必要参数和实例化QcloudSms**
 
 ```javascript
 var QcloudSms = require("qcloudsms_js");
 
-var appid = 122333333;
-var appkey = "111111111112132312xx";
+// 短信应用SDK AppID
+var appid = 1400009099;  // SDK AppID是1400开头
+
+// 短信应用SDK AppKey
+var appkey = "9ff91d87c2cd7cd0ea762f141975d1df37481d48700d70ac37470aefc60f9bad";
+
+// 需要发送短信的手机号码
 var phoneNumbers = ["21212313123", "12345678902", "12345678903"];
-var templId = 7839;
+
+// 短信模板ID，需要在短信应用中申请
+var templateId = 7839;  // NOTE: 这里的模板ID`7839`只是一个示例，真实的模板ID需要在短信控制台中申请
+
+// 签名
+var smsSign = "腾讯云"  // NOTE: 这里的签名只是示例，请使用真实的已申请的签名, 签名参数使用的是`签名内容`，而不是`签名ID`
+
+// 实例化QcloudSms
 var qcloudsms = QcloudSms(appid, appkey);
 
-// 请求回调处理, 这里只是演示，用户需要自定义相应处理回调
+// 设置请求回调处理, 这里只是演示，用户需要自定义相应处理回调
 function callback(err, res, resData) {
     if (err)
         console.log("err: ", err);
@@ -72,54 +109,58 @@ function callback(err, res, resData) {
 - **单发短信**
 
 ```javascript
+var smsType = 0; // Enum{0: 普通短信, 1: 营销短信}
 var ssender = qcloudsms.SmsSingleSender();
-ssender.send(0, 86, phoneNumbers[0],
-  "测试短信，普通单发，深圳，小明，上学。", "", "", callback);
+ssender.send(smsType, 86, phoneNumbers[0],
+  "【腾讯云】您的验证码是: 5678", "", "", callback);
 ```
 
-> `Note`: 发送短信没有指定模板ID时，发送的内容需要与已审核通过的模板内容相匹配，才可能下发成功，否则返回失败。
-> `Note`: 如需发送海外短信，同样可以使用此接口，只需将国家码"86"改写成对应国家码号。
+> `Note` 如需发送海外短信，同样可以使用此接口，只需将国家码"86"改写成对应国家码号。
+> `Note` 无论单发/群发短信还是指定模板ID单发/群发短信都需要从控制台中申请模板并且模板已经审核通过，才可能下发成功，否则返回失败。
 
 - **指定模板ID单发短信**
 
 ```javascript
 var ssender = qcloudsms.SmsSingleSender();
-var params = ["指定模板单发", "深圳", "小明"];
-ssender.sendWithParam(86, phoneNumbers[0], templId,
-  params, "", "", "", callback);
+var params = ["5678"];
+ssender.sendWithParam(86, phoneNumbers[0], templateId,
+  params, SmsSign, "", "", callback);
 ```
 
-> `Note:`无论单发短信还是指定模板ID单发短信都需要从控制台中申请模板并且模板已经审核通过，才可能下发成功，否则返回失败。
+> `Note`无论单发短信还是指定模板ID单发短信都需要从控制台中申请模板并且模板已经审核通过，才可能下发成功，否则返回失败。
 
 - **群发**
 
 ```javascript
+var smsType = 0;  // Enum{0: 普通短信, 1: 营销短信}
 var msender = qcloudsms.SmsMultiSender();
-msender.send(0, "86", phoneNumbers,
-  "测试短信，普通群发，深圳，小明，上学。", "", "", callback);
+msender.send(smsType, "86", phoneNumbers,
+  "【腾讯云】您的验证码是: 5678", "", "", callback);
 ```
+
+> `Note` 无论单发/群发短信还是指定模板ID单发/群发短信都需要从控制台中申请模板并且模板已经审核通过，才可能下发成功，否则返回失败。
 
 - **指定模板ID群发**
 
 ```javascript
 var msender = qcloudsms.SmsMultiSender();
-var params = ["指定模板群发", "深圳", "小明"];
-msender.sendWithParam("86", phoneNumbers, templId,
-  params, "", "", "", callback);
+var params = ["5678"];
+msender.sendWithParam("86", phoneNumbers, templateId,
+  params, smsSign, "", "", callback);
 ```
 
-> `Note:`群发一次请求最多支持200个号码，如有对号码数量有特殊需求请联系腾讯云短信技术支持(QQ:3012203387)。
+> `Note` 群发一次请求最多支持200个号码，如有对号码数量有特殊需求请联系腾讯云短信技术支持(QQ:3012203387)。
 
-- **发送语音验证码**
+- **发送语音通知**
 
 ```javascript
 var vpsender = qcloudsms.SmsVoicePromptSender();
-vpsender.send("86", phoneNumbers[0], 2, "1234", 2, "", callback);
+vpsender.send("86", phoneNumbers[0], 2, "5678", 2, "", callback);
 ```
 
-> `Note`: 语音验证码发送只需提供验证码数字，例如在msg=“123”，您收到的语音通知为“您的语音验证码是1 2 3”，如需自定义内容，可以使用语音通知。
+> `Note` 语音验证码发送只需提供验证码数字，例如在msg=“5678”，您收到的语音通知为“您的语音验证码是5678”，如需自定义内容，可以使用语音通知。
 
-- **发送语音通知**
+- **发送语音验证码**
 
 ```javascript
 var vvcsender = qcloudsms.SmsVoiceVerifyCodeSender();
@@ -129,25 +170,31 @@ vvcsender.send("86", phoneNumbers[0], "1234", 2, "", callback);
 - **拉取短信回执以及回复**
 
 ```javascript
+var maxNum = 10;  // 单次拉取最大量
 var spuller = qcloudsms.SmsStatusPuller();
 // 拉取短信回执
-spuller.pullCallback(10, callback);
+spuller.pullCallback(maxNum, callback);
 // 拉取回复
-spuller.pullReply(10, callback);
+spuller.pullReply(maxNum, callback);
 ```
 
-> `Note:` 短信拉取功能需要联系腾讯云短信技术支持(QQ:3012203387)，量大客户可以使用此功能批量拉取，其他客户不建议使用。
+> `Note` 短信拉取功能需要联系腾讯云短信技术支持(QQ:3012203387)，量大客户可以使用此功能批量拉取，其他客户不建议使用。
 
 - **拉取单个手机短信状态**
 
 ```javascript
+var begin_time = 1511125600;  // 开始时间(unix timestamp)
+var end_time = 1511841600;    // 结束时间(unix timestamp)
+var max_num = 10;             // 单次拉取最大量
 var mspuller = qcloudsms.SmsMobileStatusPuller();
 // 拉取短信回执
-mspuller.pullCallback("86", phoneNumbers[0], 1511125600, 1511841600, 10, callback);
+mspuller.pullCallback("86", phoneNumbers[0], begin_time, end_time, max_num, callback);
 // 拉取回复
-mspuller.pullReply("86", phoneNumbers[0], 1511125600, 1511841600, 10, callback);
+mspuller.pullReply("86", phoneNumbers[0], begin_time, end_time, max_num, callback);
 ```
+
+> `Note` 短信拉取功能需要联系腾讯云短信技术支持(QQ:3012203387)，量大客户可以使用此功能批量拉取，其他客户不建议使用。
 
 - **发送海外短信**
 
-海外短信与国内短信发送类似
+海外短信与国内短信发送类似, 发送海外短信只需替换相应国家码。
