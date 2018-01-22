@@ -72,7 +72,7 @@ npm install qcloudsms_js
 
 ## 用法
 
-> 若您对接口存在疑问，可以查阅[API开发指南](https://cloud.tencent.com/document/product/382/5808)、[API文档](https://qcloudsms.github.io/qcloudsms_py/)和[错误码](https://cloud.tencent.com/document/product/382/3771)。
+若您对接口存在疑问，可以查阅 [API开发指南](https://cloud.tencent.com/document/product/382/5808)、[API文档](https://qcloudsms.github.io/qcloudsms_js/) 和 [错误码](https://cloud.tencent.com/document/product/382/3771)。
 
 - **准备必要参数和实例化QcloudSms**
 
@@ -92,7 +92,7 @@ var phoneNumbers = ["21212313123", "12345678902", "12345678903"];
 var templateId = 7839;  // NOTE: 这里的模板ID`7839`只是一个示例，真实的模板ID需要在短信控制台中申请
 
 // 签名
-var smsSign = "腾讯云"  // NOTE: 这里的签名只是示例，请使用真实的已申请的签名, 签名参数使用的是`签名内容`，而不是`签名ID`
+var smsSign = "腾讯云";  // NOTE: 这里的签名只是示例，请使用真实的已申请的签名, 签名参数使用的是`签名内容`，而不是`签名ID`
 
 // 实例化QcloudSms
 var qcloudsms = QcloudSms(appid, appkey);
@@ -124,10 +124,10 @@ ssender.send(smsType, 86, phoneNumbers[0],
 var ssender = qcloudsms.SmsSingleSender();
 var params = ["5678"];
 ssender.sendWithParam(86, phoneNumbers[0], templateId,
-  params, SmsSign, "", "", callback);
+  params, SmsSign, "", "", callback);  // 签名参数未提供或者为空时，会使用默认签名发送短信
 ```
 
-> `Note`无论单发短信还是指定模板ID单发短信都需要从控制台中申请模板并且模板已经审核通过，才可能下发成功，否则返回失败。
+> `Note` 无论单发/群发短信还是指定模板ID单发/群发短信都需要从控制台中申请模板并且模板已经审核通过，才可能下发成功，否则返回失败。
 
 - **群发**
 
@@ -146,25 +146,25 @@ msender.send(smsType, "86", phoneNumbers,
 var msender = qcloudsms.SmsMultiSender();
 var params = ["5678"];
 msender.sendWithParam("86", phoneNumbers, templateId,
-  params, smsSign, "", "", callback);
+  params, smsSign, "", "", callback);  // 签名参数未提供或者为空时，会使用默认签名发送短信
 ```
 
 > `Note` 群发一次请求最多支持200个号码，如有对号码数量有特殊需求请联系腾讯云短信技术支持(QQ:3012203387)。
-
-- **发送语音通知**
-
-```javascript
-var vpsender = qcloudsms.SmsVoicePromptSender();
-vpsender.send("86", phoneNumbers[0], 2, "5678", 2, "", callback);
-```
-
-> `Note` 语音验证码发送只需提供验证码数字，例如在msg=“5678”，您收到的语音通知为“您的语音验证码是5678”，如需自定义内容，可以使用语音通知。
 
 - **发送语音验证码**
 
 ```javascript
 var vvcsender = qcloudsms.SmsVoiceVerifyCodeSender();
 vvcsender.send("86", phoneNumbers[0], "1234", 2, "", callback);
+```
+
+> `Note` 语音验证码发送只需提供验证码数字，例如当msg=“5678”时，您收到的语音通知为“您的语音验证码是5678”，如需自定义内容，可以使用语音通知。
+
+- **发送语音通知**
+
+```javascript
+var vpsender = qcloudsms.SmsVoicePromptSender();
+vpsender.send("86", phoneNumbers[0], 2, "5678", 2, "", callback);
 ```
 
 - **拉取短信回执以及回复**
@@ -183,14 +183,14 @@ spuller.pullReply(maxNum, callback);
 - **拉取单个手机短信状态**
 
 ```javascript
-var begin_time = 1511125600;  // 开始时间(unix timestamp)
-var end_time = 1511841600;    // 结束时间(unix timestamp)
-var max_num = 10;             // 单次拉取最大量
+var beginTime = 1511125600;  // 开始时间(unix timestamp)
+var endTime = 1511841600;    // 结束时间(unix timestamp)
+var maxNum = 10;             // 单次拉取最大量
 var mspuller = qcloudsms.SmsMobileStatusPuller();
 // 拉取短信回执
-mspuller.pullCallback("86", phoneNumbers[0], begin_time, end_time, max_num, callback);
+mspuller.pullCallback("86", phoneNumbers[0], beginTime, endTime, maxNum, callback);
 // 拉取回复
-mspuller.pullReply("86", phoneNumbers[0], begin_time, end_time, max_num, callback);
+mspuller.pullReply("86", phoneNumbers[0], beginTime, endTime, maxNum, callback);
 ```
 
 > `Note` 短信拉取功能需要联系腾讯云短信技术支持(QQ:3012203387)，量大客户可以使用此功能批量拉取，其他客户不建议使用。
