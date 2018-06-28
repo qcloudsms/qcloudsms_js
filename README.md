@@ -35,6 +35,9 @@
 
 - 发送语音验证码
 - 发送语音通知
+- 上传语音文件
+- 按语音文件fid发送语音通知
+- 指定模板发送语音通知类
 
 ## 开发
 
@@ -198,3 +201,41 @@ mspuller.pullReply("86", phoneNumbers[0], beginTime, endTime, maxNum, callback);
 - **发送海外短信**
 
 海外短信与国内短信发送类似, 发送海外短信只需替换相应国家码。
+
+
+- **上传语音文件**
+
+```javascript
+var fs = require("fs");
+
+// Note: 语音文件大小上传限制400K字节
+var filePath = "/home/pf/data/download/scripts/voice/4162.mp3";
+var fileContent = fs.readFileSync(filePath);
+var uploader = qcloudsms.VoiceFileUploader();
+
+// 上传成功后，callback里会返回语音文件的fid
+uploader.upload(fileContent, "mp3", callback);
+```
+
+> `Note` '语音文件上传'功能需要联系腾讯云短信技术支持(QQ:3012203387)才能开通
+
+- **按语音文件fid发送语音通知**
+
+```javascript
+// Note：这里fid来自`上传语音文件`接口返回的响应，要按语音
+//    文件fid发送语音通知，需要先上传语音文件获取fid
+var fid = "c799d10a43ec109f02f2288ca3c85b79e7700c98.mp3";
+var fvsender = qcloudsms.FileVoiceSender();
+fvsender.send("86", phoneNumbers[0], fid, 2, "", callback);
+```
+
+> `Note` 按'语音文件fid发送语音通知'功能需要联系腾讯云短信技术支持(QQ:3012203387)才能开通
+
+- **指定模板发送语音通知**
+
+```javascript
+var templateId = 12345;
+var params = ["5678"];
+var tvsender = qcloudsms.TtsVoiceSender();
+tvsender.send("86", phoneNumbers[0], 101310, "1235", 2, "", callback);
+```

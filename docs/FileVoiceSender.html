@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: SmsMultiSender</title>
+    <title>JSDoc: Class: FileVoiceSender</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: SmsMultiSender</h1>
+    <h1 class="page-title">Class: FileVoiceSender</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>SmsMultiSender<span class="signature">(appid, appkey)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>FileVoiceSender<span class="signature">(appid, appkey)</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -41,7 +41,7 @@
     
 
     
-    <h4 class="name" id="SmsMultiSender"><span class="type-signature"></span>new SmsMultiSender<span class="signature">(appid, appkey)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="FileVoiceSender"><span class="type-signature"></span>new FileVoiceSender<span class="signature">(appid, appkey)</span><span class="type-signature"></span></h4>
     
 
     
@@ -49,7 +49,7 @@
 
 
 <div class="description">
-    SmsMultiSender
+    FileVoiceSender
 </div>
 
 
@@ -165,7 +165,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sms.js.html">sms.js</a>, <a href="sms.js.html#line132">line 132</a>
+        <a href="voice.js.html">voice.js</a>, <a href="voice.js.html#line207">line 207</a>
     </li></ul></dd>
     
 
@@ -219,7 +219,7 @@
     
 
     
-    <h4 class="name" id="send"><span class="type-signature"></span>send<span class="signature">(number, nationCode, phoneNumber, msg, extend, ext, callback)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="send"><span class="type-signature"></span>send<span class="signature">(nationCode, phoneNumber, fid, playtimes, ext, callback)</span><span class="type-signature"></span></h4>
     
 
     
@@ -227,7 +227,7 @@
 
 
 <div class="description">
-    Send a SMS messages to multiple phones at once
+    Send file voice
 </div>
 
 
@@ -263,29 +263,6 @@
 
         <tr>
             
-                <td class="name"><code>number</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">SMS message type, Enum{0: normal SMS, 1: marketing SMS}</td>
-        </tr>
-
-    
-
-        <tr>
-            
                 <td class="name"><code>nationCode</code></td>
             
 
@@ -315,7 +292,7 @@
             <td class="type">
             
                 
-<span class="param-type">array</span>
+<span class="param-type">string</span>
 
 
             
@@ -325,14 +302,14 @@
 
             
 
-            <td class="description last">phone number array</td>
+            <td class="description last">phone number</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>msg</code></td>
+                <td class="name"><code>fid</code></td>
             
 
             <td class="type">
@@ -348,20 +325,20 @@
 
             
 
-            <td class="description last">SMS message content</td>
+            <td class="description last">voice file fid</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>extend</code></td>
+                <td class="name"><code>playtimes</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">number</span>
 
 
             
@@ -371,7 +348,7 @@
 
             
 
-            <td class="description last">extend field, default is empty string</td>
+            <td class="description last">playtimes, optional, max is 3, default is 2</td>
         </tr>
 
     
@@ -458,303 +435,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sms.js.html">sms.js</a>, <a href="sms.js.html#line150">line 150</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="sendWithParam"><span class="type-signature"></span>sendWithParam<span class="signature">(nationCode, phoneNumbers, templId, params, sign, extend, ext, callback)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Send a SMS messages with template parameters to multiple phones at once
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>nationCode</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">nation dialing code, e.g. China is 86, USA is 1</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>phoneNumbers</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">array</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">multiple phone numbers</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>templId</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">template id</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>params</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">array</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">template parameters</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>sign</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Sms user sign</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>extend</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">extend field, default is empty string</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>ext</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">ext field, content will be returned by server as it is</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">request handler, signature: function(error, response, responseData)</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sms.js.html">sms.js</a>, <a href="sms.js.html#line191">line 191</a>
+        <a href="voice.js.html">voice.js</a>, <a href="voice.js.html#line224">line 224</a>
     </li></ul></dd>
     
 
