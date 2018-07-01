@@ -39,7 +39,6 @@
  * Module dependencies.
  * @ignore
  */
-
 var url = require("url");
 var util = require("./util");
 
@@ -48,41 +47,45 @@ var util = require("./util");
  * Module exports
  * @ignore
  */
+exports.SmsVoicePromptSender = PromptVoiceSender;
+exports.PromptVoiceSender = PromptVoiceSender;
 
-exports.SmsVoicePromptSender = SmsVoicePromptSender;
-exports.SmsVoiceVerifyCodeSender = SmsVoiceVerifyCodeSender;
+exports.SmsVoiceVerifyCodeSender = CodeVoiceSender;
+exports.CodeVoiceSender = CodeVoiceSender;
+
 exports.TtsVoiceSender = TtsVoiceSender;
 exports.VoiceFileUploader = VoiceFileUploader;
 exports.FileVoiceSender = FileVoiceSender;
 
+
 /**
- * SmsVoicePromptSender
+ * PromptVoiceSender
  *
  * @param  {string}  appid  - sdk appid
  * @param  {string}  appkey - sdk appkey
  * @constructor
  */
-function SmsVoicePromptSender(appid, appkey) {
+function PromptVoiceSender(appid, appkey) {
     this.appid = appid;
     this.appkey = appkey;
     this.url = "https://cloud.tim.qq.com/v5/tlsvoicesvr/sendvoiceprompt";
 }
 
 /**
- * Send a voice prompt message
+ * Send a prompt voice
  *
  * @param  {string}    nactionCode - nation dialing code, e.g. China is 86, USA is 1
  * @param  {string}    phoneNumber - phone number
  * @param  {string}    prompttype - voice prompt type, currently value is 2
- * @param  {string}    msg - voice prompt message
+ * @param  {string}    msg - prompt voice message
  * @param  {number}    playtimes - playtimes, optional, max is 3, default is 2
  * @param  {string}    ext - ext field, content will be returned by server as it is
  * @param  {function}  callback - request handler, method signature: function(error, response, responseData)
  * @public
  */
-SmsVoicePromptSender.prototype.send = function(nationCode, phoneNumber, prompttype, msg, playtimes, ext, callback) {
+PromptVoiceSender.prototype.send = function(nationCode, phoneNumber, prompttype, msg, playtimes, ext, callback) {
     // assert
-    util.assert(typeof playtimes == "number" &amp;&amp; playtimes > 0,
+    util.assert(typeof playtimes == "number" &amp;&amp; playtimes > 0 &amp;&amp; playtimes &lt; 3,
                 "playtimes must be an integer and great than zero");
 
     var reqUrl = url.parse(this.url);
@@ -114,20 +117,20 @@ SmsVoicePromptSender.prototype.send = function(nationCode, phoneNumber, promptty
 
 
 /**
- * SmsVoiceVerifycodeSender
+ * CodeVoiceSender
  *
  * @param  {string}  appid  - sdk appid
  * @param  {string}  appkey - sdk appkey
  * @constructor
  */
-function SmsVoiceVerifyCodeSender(appid, appkey) {
+function CodeVoiceSender(appid, appkey) {
     this.appid = appid;
     this.appkey = appkey;
-    this.url = "https://cloud.tim.qq.com/v5/tlsvoicesvr/sendvoice";
+    this.url = "https://cloud.tim.qq.com/v5/tlsvoicesvr/sendcvoice";
 }
 
 /**
- * Send a voice verify code message
+ * Send a code voice
  *
  * @param  {string}    nationCode - nation dialing code, e.g. China is 86, USA is 1
  * @param  {string}    phonenumber -  phone number
@@ -137,7 +140,7 @@ function SmsVoiceVerifyCodeSender(appid, appkey) {
  * @param  {function}  callback - request handler, method signature: function(error, response, responseData)
  * @public
  */
-SmsVoiceVerifyCodeSender.prototype.send = function(nationCode, phoneNumber, msg, playtimes, ext, callback) {
+CodeVoiceSender.prototype.send = function(nationCode, phoneNumber, msg, playtimes, ext, callback) {
     // assert
     util.assert(typeof playtimes == "number" &amp;&amp; playtimes > 0,
                 "playtimes must be an integer and great than zero");
@@ -182,7 +185,7 @@ function TtsVoiceSender(appid, appkey) {
 }
 
 /**
- * Send TTS voice
+ * Send a tts voice
  *
  * @param  {string}    nationCode - nation dialing code, e.g. China is 86, USA is 1
  * @param  {string}    phonenumber -  phone number
@@ -235,11 +238,11 @@ TtsVoiceSender.prototype.send = function(nationCode, phoneNumber, templId, param
 function FileVoiceSender(appid, appkey) {
     this.appid = appid;
     this.appkey = appkey;
-    this.url = "https://cloud.tim.qq.com/v5/tlsvoicesvr/sendtvoice";
+    this.url = "https://cloud.tim.qq.com/v5/tlsvoicesvr/sendfvoice";
 }
 
 /**
- * Send file voice
+ * Send a file voice
  *
  * @param  {string}    nationCode - nation dialing code, e.g. China is 86, USA is 1
  * @param  {string}    phoneNumber -  phone number
@@ -345,13 +348,13 @@ VoiceFileUploader.prototype.upload = function(fileContent, contentType, callback
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="FileVoiceSender.html">FileVoiceSender</a></li><li><a href="SmsMobileStatusPuller.html">SmsMobileStatusPuller</a></li><li><a href="SmsMultiSender.html">SmsMultiSender</a></li><li><a href="SmsSingleSender.html">SmsSingleSender</a></li><li><a href="SmsStatusPuller.html">SmsStatusPuller</a></li><li><a href="SmsVoicePromptSender.html">SmsVoicePromptSender</a></li><li><a href="SmsVoiceVerifyCodeSender.html">SmsVoiceVerifyCodeSender</a></li><li><a href="TtsVoiceSender.html">TtsVoiceSender</a></li><li><a href="VoiceFileUploader.html">VoiceFileUploader</a></li></ul><h3>Global</h3><ul><li><a href="global.html"></a></li><li><a href="global.html#assert">assert</a></li><li><a href="global.html#calculateAuth">calculateAuth</a></li><li><a href="global.html#calculateSignature">calculateSignature</a></li><li><a href="global.html#createQcloudSms">createQcloudSms</a></li><li><a href="global.html#getCurrentTime">getCurrentTime</a></li><li><a href="global.html#getRandom">getRandom</a></li><li><a href="global.html#request">request</a></li><li><a href="global.html#sha1sum">sha1sum</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CodeVoiceSender.html">CodeVoiceSender</a></li><li><a href="FileVoiceSender.html">FileVoiceSender</a></li><li><a href="PromptVoiceSender.html">PromptVoiceSender</a></li><li><a href="SmsMobileStatusPuller.html">SmsMobileStatusPuller</a></li><li><a href="SmsMultiSender.html">SmsMultiSender</a></li><li><a href="SmsSingleSender.html">SmsSingleSender</a></li><li><a href="SmsStatusPuller.html">SmsStatusPuller</a></li><li><a href="TtsVoiceSender.html">TtsVoiceSender</a></li><li><a href="VoiceFileUploader.html">VoiceFileUploader</a></li></ul><h3>Global</h3><ul><li><a href="global.html"></a></li><li><a href="global.html#assert">assert</a></li><li><a href="global.html#calculateAuth">calculateAuth</a></li><li><a href="global.html#calculateSignature">calculateSignature</a></li><li><a href="global.html#createQcloudSms">createQcloudSms</a></li><li><a href="global.html#getCurrentTime">getCurrentTime</a></li><li><a href="global.html#getRandom">getRandom</a></li><li><a href="global.html#request">request</a></li><li><a href="global.html#sha1sum">sha1sum</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Jun 28 2018 19:39:36 GMT+0800 (CST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Jul 01 2018 18:32:59 GMT+0800 (China Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

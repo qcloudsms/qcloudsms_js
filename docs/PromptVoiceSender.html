@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: SmsMobileStatusPuller</title>
+    <title>JSDoc: Class: PromptVoiceSender</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: SmsMobileStatusPuller</h1>
+    <h1 class="page-title">Class: PromptVoiceSender</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>SmsMobileStatusPuller<span class="signature">(appid, appkey)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>PromptVoiceSender<span class="signature">(appid, appkey)</span><span class="type-signature"></span></h2>
         
     
 </header>
@@ -41,7 +41,7 @@
     
 
     
-    <h4 class="name" id="SmsMobileStatusPuller"><span class="type-signature"></span>new SmsMobileStatusPuller<span class="signature">(appid, appkey)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="PromptVoiceSender"><span class="type-signature"></span>new PromptVoiceSender<span class="signature">(appid, appkey)</span><span class="type-signature"></span></h4>
     
 
     
@@ -49,7 +49,7 @@
 
 
 <div class="description">
-    SmsMobileStatusPuller
+    PromptVoiceSender
 </div>
 
 
@@ -165,7 +165,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sms.js.html">sms.js</a>, <a href="sms.js.html#line299">line 299</a>
+        <a href="voice.js.html">voice.js</a>, <a href="voice.js.html#line40">line 40</a>
     </li></ul></dd>
     
 
@@ -219,7 +219,7 @@
     
 
     
-    <h4 class="name" id="pullCallback"><span class="type-signature"></span>pullCallback<span class="signature">(nationCode, mobile, beginTime, endTime, max, callback)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="send"><span class="type-signature"></span>send<span class="signature">(nactionCode, phoneNumber, prompttype, msg, playtimes, ext, callback)</span><span class="type-signature"></span></h4>
     
 
     
@@ -227,7 +227,7 @@
 
 
 <div class="description">
-    Pull callback SMS message status for single mobile
+    Send a prompt voice
 </div>
 
 
@@ -263,7 +263,7 @@
 
         <tr>
             
-                <td class="name"><code>nationCode</code></td>
+                <td class="name"><code>nactionCode</code></td>
             
 
             <td class="type">
@@ -286,7 +286,7 @@
 
         <tr>
             
-                <td class="name"><code>mobile</code></td>
+                <td class="name"><code>phoneNumber</code></td>
             
 
             <td class="type">
@@ -302,14 +302,60 @@
 
             
 
-            <td class="description last">mobile number</td>
+            <td class="description last">phone number</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>beginTime</code></td>
+                <td class="name"><code>prompttype</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">voice prompt type, currently value is 2</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>msg</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">prompt voice message</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>playtimes</code></td>
             
 
             <td class="type">
@@ -325,20 +371,20 @@
 
             
 
-            <td class="description last">begin time, unix timestamp</td>
+            <td class="description last">playtimes, optional, max is 3, default is 2</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>endTime</code></td>
+                <td class="name"><code>ext</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type">string</span>
 
 
             
@@ -348,30 +394,7 @@
 
             
 
-            <td class="description last">end time, unix timestamp</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>max</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">maximum number of message status</td>
+            <td class="description last">ext field, content will be returned by server as it is</td>
         </tr>
 
     
@@ -435,257 +458,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sms.js.html">sms.js</a>, <a href="sms.js.html#line360">line 360</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="pullReply"><span class="type-signature"></span>pullReply<span class="signature">(nationCode, mobile, beginTime, endTime, max, callback)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Pull reply SMS message status for single mobile
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>nationCode</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">nation dialing code, e.g. China is 86, USA is 1</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>mobile</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">mobile number</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>beginTime</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">begin time, unix timestamp</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>endTime</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">end time, unix timestamp</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>max</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">maximum number of message status</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>callback</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">request handler, method signature: function(error, response, responseData)</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="sms.js.html">sms.js</a>, <a href="sms.js.html#line375">line 375</a>
+        <a href="voice.js.html">voice.js</a>, <a href="voice.js.html#line58">line 58</a>
     </li></ul></dd>
     
 
