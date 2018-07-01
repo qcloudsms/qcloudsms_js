@@ -75,7 +75,15 @@ npm install qcloudsms_js
 
 ## 用法
 
-若您对接口存在疑问，可以查阅 [API开发指南](https://cloud.tencent.com/document/product/382/5808)、[API文档](https://qcloudsms.github.io/qcloudsms_js/) 和 [错误码](https://cloud.tencent.com/document/product/382/3771)。
+### 文档
+
+若您对接口存在疑问，可以查阅:
+
+* [API开发指南](https://cloud.tencent.com/document/product/382/5808)
+* [SDK文档](https://qcloudsms.github.io/qcloudsms_js/)
+* [错误码](https://cloud.tencent.com/document/product/382/3771)
+
+### 示例
 
 - **准备必要参数和实例化QcloudSms**
 
@@ -102,10 +110,12 @@ var qcloudsms = QcloudSms(appid, appkey);
 
 // 设置请求回调处理, 这里只是演示，用户需要自定义相应处理回调
 function callback(err, res, resData) {
-    if (err)
+    if (err) {
         console.log("err: ", err);
-    else
+    } else {
+        console.log("request data: ", res.req);
         console.log("response data: ", resData);
+    }
 }
 ```
 
@@ -157,8 +167,8 @@ msender.sendWithParam("86", phoneNumbers, templateId,
 - **发送语音验证码**
 
 ```javascript
-var vvcsender = qcloudsms.SmsVoiceVerifyCodeSender();
-vvcsender.send("86", phoneNumbers[0], "1234", 2, "", callback);
+var cvsender = qcloudsms.CodeVoiceSender();
+cvsender.send("86", phoneNumbers[0], "1234", 2, "", callback);
 ```
 
 > `Note` 语音验证码发送只需提供验证码数字，例如当msg=“5678”时，您收到的语音通知为“您的语音验证码是5678”，如需自定义内容，可以使用语音通知。
@@ -166,8 +176,8 @@ vvcsender.send("86", phoneNumbers[0], "1234", 2, "", callback);
 - **发送语音通知**
 
 ```javascript
-var vpsender = qcloudsms.SmsVoicePromptSender();
-vpsender.send("86", phoneNumbers[0], 2, "5678", 2, "", callback);
+var pvsender = qcloudsms.PromptVoiceSender();
+pvsender.send("86", phoneNumbers[0], 2, "5678", 2, "", callback);
 ```
 
 - **拉取短信回执以及回复**
@@ -212,7 +222,6 @@ var fs = require("fs");
 var filePath = "/home/pf/data/download/scripts/voice/4162.mp3";
 var fileContent = fs.readFileSync(filePath);
 var uploader = qcloudsms.VoiceFileUploader();
-
 // 上传成功后，callback里会返回语音文件的fid
 uploader.upload(fileContent, "mp3", callback);
 ```
@@ -237,5 +246,5 @@ fvsender.send("86", phoneNumbers[0], fid, 2, "", callback);
 var templateId = 12345;
 var params = ["5678"];
 var tvsender = qcloudsms.TtsVoiceSender();
-tvsender.send("86", phoneNumbers[0], 101310, "1235", 2, "", callback);
+tvsender.send("86", phoneNumbers[0], templateId, params, 2, "", callback);
 ```
