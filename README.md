@@ -35,6 +35,9 @@
 
 - 发送语音验证码
 - 发送语音通知
+- 上传语音文件
+- 按语音文件fid发送语音通知
+- 指定模板发送语音通知类
 
 ## 开发
 
@@ -72,7 +75,15 @@ npm install qcloudsms_js
 
 ## 用法
 
-若您对接口存在疑问，可以查阅 [API开发指南](https://cloud.tencent.com/document/product/382/5808)、[API文档](https://qcloudsms.github.io/qcloudsms_js/) 和 [错误码](https://cloud.tencent.com/document/product/382/3771)。
+### 文档
+
+若您对接口存在疑问，可以查阅:
+
+* [API开发指南](https://cloud.tencent.com/document/product/382/5808)
+* [SDK文档](https://qcloudsms.github.io/qcloudsms_js/)
+* [错误码](https://cloud.tencent.com/document/product/382/3771)
+
+### 示例
 
 - **准备必要参数和实例化QcloudSms**
 
@@ -99,10 +110,12 @@ var qcloudsms = QcloudSms(appid, appkey);
 
 // 设置请求回调处理, 这里只是演示，用户需要自定义相应处理回调
 function callback(err, res, resData) {
-    if (err)
+    if (err) {
         console.log("err: ", err);
-    else
+    } else {
+        console.log("request data: ", res.req);
         console.log("response data: ", resData);
+    }
 }
 ```
 
@@ -154,8 +167,8 @@ msender.sendWithParam("86", phoneNumbers, templateId,
 - **发送语音验证码**
 
 ```javascript
-var vvcsender = qcloudsms.SmsVoiceVerifyCodeSender();
-vvcsender.send("86", phoneNumbers[0], "1234", 2, "", callback);
+var cvsender = qcloudsms.CodeVoiceSender();
+cvsender.send("86", phoneNumbers[0], "1234", 2, "", callback);
 ```
 
 > `Note` 语音验证码发送只需提供验证码数字，例如当msg=“5678”时，您收到的语音通知为“您的语音验证码是5678”，如需自定义内容，可以使用语音通知。
@@ -163,8 +176,8 @@ vvcsender.send("86", phoneNumbers[0], "1234", 2, "", callback);
 - **发送语音通知**
 
 ```javascript
-var vpsender = qcloudsms.SmsVoicePromptSender();
-vpsender.send("86", phoneNumbers[0], 2, "5678", 2, "", callback);
+var pvsender = qcloudsms.PromptVoiceSender();
+pvsender.send("86", phoneNumbers[0], 2, "5678", 2, "", callback);
 ```
 
 - **拉取短信回执以及回复**
@@ -198,3 +211,40 @@ mspuller.pullReply("86", phoneNumbers[0], beginTime, endTime, maxNum, callback);
 - **发送海外短信**
 
 海外短信与国内短信发送类似, 发送海外短信只需替换相应国家码。
+
+
+- **上传语音文件**
+
+```javascript
+var fs = require("fs");
+
+// Note: 语音文件大小上传限制400K字节
+var filePath = "/home/pf/data/download/scripts/voice/4162.mp3";
+var fileContent = fs.readFileSync(filePath);
+var uploader = qcloudsms.VoiceFileUploader();
+// 上传成功后，callback里会返回语音文件的fid
+uploader.upload(fileContent, "mp3", callback);
+```
+
+> `Note` '语音文件上传'功能需要联系腾讯云短信技术支持(QQ:3012203387)才能开通
+
+- **按语音文件fid发送语音通知**
+
+```javascript
+// Note：这里fid来自`上传语音文件`接口返回的响应，要按语音
+//    文件fid发送语音通知，需要先上传语音文件获取fid
+var fid = "c799d10a43ec109f02f2288ca3c85b79e7700c98.mp3";
+var fvsender = qcloudsms.FileVoiceSender();
+fvsender.send("86", phoneNumbers[0], fid, 2, "", callback);
+```
+
+> `Note` 按'语音文件fid发送语音通知'功能需要联系腾讯云短信技术支持(QQ:3012203387)才能开通
+
+- **指定模板发送语音通知**
+
+```javascript
+var templateId = 12345;
+var params = ["5678"];
+var tvsender = qcloudsms.TtsVoiceSender();
+tvsender.send("86", phoneNumbers[0], templateId, params, 2, "", callback);
+```

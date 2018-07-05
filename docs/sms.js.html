@@ -57,7 +57,7 @@ exports.SmsMobileStatusPuller = SmsMobileStatusPuller;
 /**
  * SmsSingleSender
  *
- * @param  {string}  appid - sdk appid
+ * @param  {string}  appid  - sdk appid
  * @param  {string}  appkey - sdk appkey
  * @constructor
  */
@@ -115,7 +115,7 @@ SmsSingleSender.prototype.send = function(msgType, nationCode, phoneNumber, msg,
  * @param  {string}    phoneNumber - phone number
  * @param  {number}    templId - template id
  * @param  {array}     params - template parameters
- * @param  {string}    sign - Sms user sign
+ * @param  {string}    sign - SMS user sign
  * @param  {string}    extend - extend field, default is empty string
  * @param  {string}    ext - ext field, content will be returned by server as it is
  * @param  {function}  callback - request handler, signature: function(error, response, responseData)
@@ -153,7 +153,7 @@ SmsSingleSender.prototype.sendWithParam = function(nationCode, phoneNumber, temp
 /**
  * SmsMultiSender
  *
- * @param  {string}  appid - sdk appid
+ * @param  {string}  appid  - sdk appid
  * @param  {string}  appkey - sdk appkey
  * @constructor
  */
@@ -210,7 +210,7 @@ SmsMultiSender.prototype.send = function(msgType, nationCode, phoneNumbers, msg,
  * @param  {array}     phoneNumbers - multiple phone numbers
  * @param  {number}    templId - template id
  * @param  {array}     params - template parameters
- * @param  {string}    sign - Sms user sign
+ * @param  {string}    sign - SMS user sign
  * @param  {string}    extend - extend field, default is empty string
  * @param  {string}    ext - ext field, content will be returned by server as it is
  * @param  {function}  callback - request handler, signature: function(error, response, responseData)
@@ -219,7 +219,7 @@ SmsMultiSender.prototype.send = function(msgType, nationCode, phoneNumbers, msg,
 SmsMultiSender.prototype.sendWithParam = function(nationCode, phoneNumbers, templId, params, sign, extend, ext, callback) {
     // assert
     util.assert(Array.isArray(phoneNumbers), "parameter `phoneNumbers` must be an array");
-    util.assert(Array.isArray(params), "parameter `phoneNumbers` must be an array");
+    util.assert(Array.isArray(params), "parameter `params` must be an array");
 
     var reqUrl = url.parse(this.url);
     var random = util.getRandom();
@@ -250,7 +250,7 @@ SmsMultiSender.prototype.sendWithParam = function(nationCode, phoneNumbers, temp
 /**
  * SmsStatusPuller
  *
- * @param  {string}  appid - sdk appid
+ * @param  {string}  appid  - sdk appid
  * @param  {string}  appkey - sdk appkey
  * @constructor
  */
@@ -320,7 +320,7 @@ SmsStatusPuller.prototype.pullReply = function(max, callback) {
 /**
  * SmsMobileStatusPuller
  *
- * @param  {string}  appid - sdk appid
+ * @param  {string}  appid  - sdk appid
  * @param  {string}  appkey - sdk appkey
  * @constructor
  */
@@ -413,13 +413,13 @@ SmsMobileStatusPuller.prototype.pullReply = function(nationCode, mobile, beginTi
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="SmsMobileStatusPuller.html">SmsMobileStatusPuller</a></li><li><a href="SmsMultiSender.html">SmsMultiSender</a></li><li><a href="SmsSingleSender.html">SmsSingleSender</a></li><li><a href="SmsStatusPuller.html">SmsStatusPuller</a></li><li><a href="SmsVoicePromptSender.html">SmsVoicePromptSender</a></li><li><a href="SmsVoiceVerifyCodeSender.html">SmsVoiceVerifyCodeSender</a></li></ul><h3>Global</h3><ul><li><a href="global.html"></a></li><li><a href="global.html#assert">assert</a></li><li><a href="global.html#calculateSignature">calculateSignature</a></li><li><a href="global.html#createQcloudSms">createQcloudSms</a></li><li><a href="global.html#getCurrentTime">getCurrentTime</a></li><li><a href="global.html#getRandom">getRandom</a></li><li><a href="global.html#request">request</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CodeVoiceSender.html">CodeVoiceSender</a></li><li><a href="FileVoiceSender.html">FileVoiceSender</a></li><li><a href="PromptVoiceSender.html">PromptVoiceSender</a></li><li><a href="SmsMobileStatusPuller.html">SmsMobileStatusPuller</a></li><li><a href="SmsMultiSender.html">SmsMultiSender</a></li><li><a href="SmsSingleSender.html">SmsSingleSender</a></li><li><a href="SmsStatusPuller.html">SmsStatusPuller</a></li><li><a href="TtsVoiceSender.html">TtsVoiceSender</a></li><li><a href="VoiceFileUploader.html">VoiceFileUploader</a></li></ul><h3>Global</h3><ul><li><a href="global.html"></a></li><li><a href="global.html#assert">assert</a></li><li><a href="global.html#calculateAuth">calculateAuth</a></li><li><a href="global.html#calculateSignature">calculateSignature</a></li><li><a href="global.html#createQcloudSms">createQcloudSms</a></li><li><a href="global.html#getCurrentTime">getCurrentTime</a></li><li><a href="global.html#getRandom">getRandom</a></li><li><a href="global.html#request">request</a></li><li><a href="global.html#sha1sum">sha1sum</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Dec 06 2017 10:46:37 GMT+0800 (CST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Jul 01 2018 18:32:59 GMT+0800 (China Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

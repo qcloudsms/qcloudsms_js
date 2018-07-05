@@ -228,7 +228,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="util.js.html">util.js</a>, <a href="util.js.html#line120">line 120</a>
+        <a href="util.js.html">util.js</a>, <a href="util.js.html#line162">line 162</a>
     </li></ul></dd>
     
 
@@ -251,6 +251,228 @@
 
 
 
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="calculateAuth"><span class="type-signature"></span>calculateAuth<span class="signature">(appkey, random, time, fileSha1sum)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Calculate a voice uploading request signature
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>appkey</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">sdk appkey</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>random</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">random string</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>time</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">unix timestamp time</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>fileSha1sum</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">voice file sha1sum</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="util.js.html">util.js</a>, <a href="util.js.html#line88">line 88</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -432,7 +654,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="util.js.html">util.js</a>, <a href="util.js.html#line57">line 57</a>
+        <a href="util.js.html">util.js</a>, <a href="util.js.html#line63">line 63</a>
     </li></ul></dd>
     
 
@@ -712,7 +934,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="util.js.html">util.js</a>, <a href="util.js.html#line43">line 43</a>
+        <a href="util.js.html">util.js</a>, <a href="util.js.html#line49">line 49</a>
     </li></ul></dd>
     
 
@@ -816,7 +1038,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="util.js.html">util.js</a>, <a href="util.js.html#line33">line 33</a>
+        <a href="util.js.html">util.js</a>, <a href="util.js.html#line39">line 39</a>
     </li></ul></dd>
     
 
@@ -992,7 +1214,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="util.js.html">util.js</a>, <a href="util.js.html#line79">line 79</a>
+        <a href="util.js.html">util.js</a>, <a href="util.js.html#line115">line 115</a>
     </li></ul></dd>
     
 
@@ -1021,6 +1243,159 @@
 
 
         
+            
+
+    
+
+    
+    <h4 class="name" id="sha1sum"><span class="type-signature"></span>sha1sum<span class="signature">(buf)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Calculate sha1sum
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>buf</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Buffer</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">raw buf</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="util.js.html">util.js</a>, <a href="util.js.html#line103">line 103</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
     
 
     
@@ -1036,13 +1411,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="SmsMobileStatusPuller.html">SmsMobileStatusPuller</a></li><li><a href="SmsMultiSender.html">SmsMultiSender</a></li><li><a href="SmsSingleSender.html">SmsSingleSender</a></li><li><a href="SmsStatusPuller.html">SmsStatusPuller</a></li><li><a href="SmsVoicePromptSender.html">SmsVoicePromptSender</a></li><li><a href="SmsVoiceVerifyCodeSender.html">SmsVoiceVerifyCodeSender</a></li></ul><h3>Global</h3><ul><li><a href="global.html"></a></li><li><a href="global.html#assert">assert</a></li><li><a href="global.html#calculateSignature">calculateSignature</a></li><li><a href="global.html#createQcloudSms">createQcloudSms</a></li><li><a href="global.html#getCurrentTime">getCurrentTime</a></li><li><a href="global.html#getRandom">getRandom</a></li><li><a href="global.html#request">request</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="CodeVoiceSender.html">CodeVoiceSender</a></li><li><a href="FileVoiceSender.html">FileVoiceSender</a></li><li><a href="PromptVoiceSender.html">PromptVoiceSender</a></li><li><a href="SmsMobileStatusPuller.html">SmsMobileStatusPuller</a></li><li><a href="SmsMultiSender.html">SmsMultiSender</a></li><li><a href="SmsSingleSender.html">SmsSingleSender</a></li><li><a href="SmsStatusPuller.html">SmsStatusPuller</a></li><li><a href="TtsVoiceSender.html">TtsVoiceSender</a></li><li><a href="VoiceFileUploader.html">VoiceFileUploader</a></li></ul><h3>Global</h3><ul><li><a href="global.html"></a></li><li><a href="global.html#assert">assert</a></li><li><a href="global.html#calculateAuth">calculateAuth</a></li><li><a href="global.html#calculateSignature">calculateSignature</a></li><li><a href="global.html#createQcloudSms">createQcloudSms</a></li><li><a href="global.html#getCurrentTime">getCurrentTime</a></li><li><a href="global.html#getRandom">getRandom</a></li><li><a href="global.html#request">request</a></li><li><a href="global.html#sha1sum">sha1sum</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Dec 06 2017 10:46:37 GMT+0800 (CST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Jul 01 2018 18:32:59 GMT+0800 (China Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
